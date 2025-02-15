@@ -2,43 +2,71 @@
 #include <Windows.h>
 #include <iostream>
 
+Difficulties DIFF = EXPERT;
+const int SIZEA = difficultyData[DIFF].sizeX, SIZEB = difficultyData[DIFF].sizeY, MINES = difficultyData[DIFF].mines;
 
-//const int SIZEA = 24, SIZEB = 20, MINES = 99; //google minesweeper hard
-constexpr int SIZEA = 30, SIZEB = 16, MINES = 99; //microsoft minesweeper expert
 
-void initField(int[][SIZEB]);
-void labelField(int[][SIZEB]);
-int find3BV(int[][SIZEB]);
-void floodFillMark(int[][SIZEB], bool[][SIZEB], int, int);
+void initField(int**);
+void labelField(int**);
+int find3BV(int**);
+void floodFillMark(int**, bool**, int, int);
 
 
 int main()
 {
-    int field[SIZEA][SIZEB], count = 0, temp = 0;
-    long sum = 0;
+    int** field = new int*[SIZEA];
+    int input = 0;
     DataPlot data;
     srand(time(0));
+
+    for (int i = 0; i < SIZEA; ++i) 
+        field[i] = new int[SIZEB];
+
+    for (int i = 0; i < SIZEA * SIZEB; ++i)
+        field[i / SIZEB][i % SIZEB] = 0;
+
 
     std::cout << SIZEA << 'x' << SIZEB
         << ", " << MINES << " mines\n";
 
-    for (int i = 0; i < 10000000; i++)
+    data.load(DIFF);
+
+    for (int i = 1; i <= 1000000; i++)
     {
         initField(field);
         labelField(field);
-        temp = find3BV(field);
 
-        data.insert(temp);
+        data.insert(find3BV(field));
 
-        if ((i + 1) % 50000 == 0)
-            std::cout << "\nBoards checked: " << i + 1
-            << "\nmin 3bv: " << data.minimum() << "\nmax 3bv: " << data.maximum()
-            << "\nAverage 3bv: " << data.mean() << "\nMedian 3bv: " << data.median() << "\n";
+        if (i % 50000 == 0)
+        {
+            std::cout << "\nBoards checked: " << data.total()
+				<< "\nmin 3bv: " << data.minimum()
+        		<< "\nq1: " << data.q1()
+        		<< "\nmedian: " << data.median()                                    
+				<< "\nmean: " << data.mean()
+                << "\nq3: " << data.q3()
+                << "\nmax 3bv: " << data.maximum()
+                << "\n";
+        }
+    }
+
+    data.save(DIFF);
+
+    for (int i = 0; i < SIZEA; ++i) 
+        delete[] field[i];
+    delete[] field;
+    
+    while (true)
+    {
+        std::cout << "\nhow rare is YOUR 3bv? \n3bv: ";
+        std::cin >> input;
+        std::cout << data.percentage(input) * 100 << "% chance!\n";
     }
 }
 
 
-void initField(int field[][SIZEB])
+void initField(int** field)
 {
     for (int i = 0; i < SIZEA * SIZEB; i++)
         field[i / SIZEB][i % SIZEB] = 0;
@@ -58,7 +86,7 @@ void initField(int field[][SIZEB])
     }
 }
 
-void labelField(int field[][SIZEB])
+void labelField(int** field)
 {
     for (int i = 0; i < SIZEA * SIZEB; i++)
         if (field[i / SIZEB][i % SIZEB] == 9) //if mine
@@ -72,10 +100,17 @@ void labelField(int field[][SIZEB])
 }
 
 
-int find3BV(int field[][SIZEB])
+int find3BV(int** field)
 {
-    int countClicks = 0, countUnmarks = 0;
-    bool marks[SIZEA][SIZEB]{}; //to track visited cells
+    int countClicks = 0;
+    bool** marks = new bool* [SIZEA]; //to track visited cells
+
+    for (int i = 0; i < SIZEA; ++i)
+        marks[i] = new bool[SIZEB];
+
+    for (int i = 0; i < SIZEA * SIZEB; ++i)
+        marks[i / SIZEB][i % SIZEB] = false;
+
 
     for (int i = 0; i < SIZEA; ++i) 
     {
@@ -97,13 +132,17 @@ int find3BV(int field[][SIZEB])
 
     for (int i = 0; i < SIZEA * SIZEB; i++)
         if (!marks[i / SIZEB][i % SIZEB])
-            countUnmarks++; //0s revealed and mines marked, clicks left over
+            countClicks++; //0s revealed and mines marked, clicks left over
 
-    return countClicks + countUnmarks;
+    for (int i = 0; i < SIZEA; ++i) 
+        delete[] marks[i];
+    delete[] marks;
+
+    return countClicks;
 }
 
 
-void floodFillMark(int field[][SIZEB], bool marks[][SIZEB], int a, int b) 
+void floodFillMark(int** field, bool** marks, int a, int b) 
 {
     if (a < 0 || b < 0 || a >= SIZEA || b >= SIZEB) return; //out of bounds
     if (marks[a][b]) return; //already visited

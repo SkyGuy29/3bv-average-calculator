@@ -27,4 +27,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="expert.txt" />
+    <Text Include="intermediate.txt" />
+    <Text Include="beginner.txt" />
+    <Text Include="googHard.txt" />
+  </ItemGroup>
 </Project>
