@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <iostream>
 
-Difficulties DIFF = EXPERT;
+Difficulties DIFF = INTERMEDIATE;
 const int SIZEA = difficultyData[DIFF].sizeX, SIZEB = difficultyData[DIFF].sizeY, MINES = difficultyData[DIFF].mines;
 
 
