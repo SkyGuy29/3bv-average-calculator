@@ -1,8 +1,10 @@
-#include <iostream>
+#include "DataPlot.h"
 #include <Windows.h>
+#include <iostream>
+
 
 //const int SIZEA = 24, SIZEB = 20, MINES = 99; //google minesweeper hard
-const int SIZEA = 30, SIZEB = 16, MINES = 99; //microsoft minesweeper expert
+constexpr int SIZEA = 30, SIZEB = 16, MINES = 99; //microsoft minesweeper expert
 
 void initField(int[][SIZEB]);
 void labelField(int[][SIZEB]);
@@ -12,46 +14,26 @@ void floodFillMark(int[][SIZEB], bool[][SIZEB], int, int);
 
 int main()
 {
-    int field[SIZEA][SIZEB], count = 0, min = 2048, max = 0, temp = 0;
+    int field[SIZEA][SIZEB], count = 0, temp = 0;
     long sum = 0;
+    DataPlot data;
     srand(time(0));
 
     std::cout << SIZEA << 'x' << SIZEB
         << ", " << MINES << " mines\n";
-    
+
     for (int i = 0; i < 10000000; i++)
     {
         initField(field);
-        /*
-        if (count == 0)
-        {
-            std::cout << '\n';
-            for (int i = 0; i < SIZEA * SIZEB; i++)
-            {
-                if (field[i / SIZEB][i % SIZEB] == 0)
-                    std::cout << ' ';
-                else
-                    std::cout << field[i / SIZEB][i % SIZEB];
-                if ((i + 1) % SIZEA == 0)
-                    std::cout << '\n';
-            }
-        }
-        */
-
         labelField(field);
         temp = find3BV(field);
-        if (temp < min)
-            min = temp;
-        if (temp > max)
-            max = temp;
-        sum += temp;
 
+        data.insert(temp);
 
         if ((i + 1) % 50000 == 0)
             std::cout << "\nBoards checked: " << i + 1
-                << "\nmin 3bv: " << min << "\nmax 3bv: " << max
-                << "\nAverage 3bv: " << (double)sum / (i + 1) << "\n";
-        
+            << "\nmin 3bv: " << data.minimum() << "\nmax 3bv: " << data.maximum()
+            << "\nAverage 3bv: " << data.mean() << "\nMedian 3bv: " << data.median() << "\n";
     }
 }
 
@@ -89,7 +71,9 @@ void labelField(int field[][SIZEB])
                         field[i / SIZEB + j][i % SIZEB + k]++; //increase cell value by 1
 }
 
-int find3BV(int field[][SIZEB]) {
+
+int find3BV(int field[][SIZEB])
+{
     int countClicks = 0, countUnmarks = 0;
     bool marks[SIZEA][SIZEB]{}; //to track visited cells
 
