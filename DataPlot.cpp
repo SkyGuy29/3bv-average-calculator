@@ -1,9 +1,9 @@
 #include "DataPlot.h"
 
 
-void DataPlot::load(Difficulties diffic)
+void DataPlot::load(Difficulty diffic)
 {
-    std::ifstream file(difficultyData[diffic].fileName);
+    std::ifstream file(diffData[diffic].fileName);
     int x, y;
 
     do
@@ -149,9 +149,10 @@ double DataPlot::percentage(const int xVal)
     }
 }
 
-void DataPlot::save(Difficulties diffic) const
+
+void DataPlot::save(Difficulty diffic) const
 {
-    std::ofstream file(difficultyData[diffic].fileName);
+    std::ofstream file(diffData[diffic].fileName);
 
     for (const auto i : data)
     {

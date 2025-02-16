@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <vector>
 #include <fstream>
+#include "Difficulty.hpp"
 
 
 struct NumMult
@@ -12,36 +13,10 @@ struct NumMult
 };
 
 
-struct DiffData
-{
-    std::string fileName;
-    int sizeX, sizeY, mines;
-};
-
-
-enum Difficulties
-{
-	BEGINNER,
-    INTERMEDIATE,
-    EXPERT,
-    GOOG_HARD,
-    COUNT
-};
-
-
-static const DiffData difficultyData[COUNT] =
-{
-    {"beginner.txt", 9, 9, 10},
-    {"intermediate.txt", 16, 16, 40},
-    {"expert.txt", 30, 16, 99},
-    {"googHard.txt", 24, 20, 99}
-};
-
-
 class DataPlot
 {
 public:
-    void load(Difficulties);
+    void load(Difficulty);
     void insert(int newNum);
     int minimum() { if (!sorted) sort(); return data[0].num; }
     int q1();
@@ -51,7 +26,7 @@ public:
     int maximum() { if (!sorted) sort(); return data[data.size() - 1].num; }
     int total() const;
     double percentage(int xVal);
-    void save(Difficulties) const;
+    void save(Difficulty) const;
 
 private:
     void sort()

@@ -130,9 +130,12 @@
   <ItemGroup>
     <ClCompile Include="3bv average calculator.cpp" />
     <ClCompile Include="DataPlot.cpp" />
+    <ClCompile Include="Field.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataPlot.h" />
+    <ClInclude Include="Difficulty.hpp" />
+    <ClInclude Include="Field.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="beginner.txt" />
