@@ -29,5 +29,5 @@ static const Foo diffData[COUNT] =
 
 
 
-#define DIFF INTERMEDIATE
+#define DIFF EXPERT
 const int SIZEA = diffData[DIFF].sizeX, SIZEB = diffData[DIFF].sizeY, MINES = diffData[DIFF].mines;

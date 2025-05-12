@@ -44,9 +44,9 @@ int main()
         percentage = data.percentage(input);
         std::cout << percentage * 100 << "% chance! (" << percentage <<")\n";
 
-        marginOfError = 1.96 * sqrt(percentage * (1 - percentage) / data.total());
+        marginOfError = 2.576 * sqrt(percentage * (1 - percentage) / data.total());
 
-        std::cout << "95% confidence interval:\n"
+        std::cout << "99% confidence interval:\n"
     		<< '(' << percentage - marginOfError << ", " << percentage + marginOfError << ")\n";
     }
 }
