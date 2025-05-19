@@ -23,7 +23,8 @@ int main()
             << "0: exit\n"
             << "1: change difficulty\n"
             << "2: generate boards\n"
-            << "3: find probability\n\n"
+            << "3: print stats\n"
+            << "4: find probability\n\n"
             << "choose: ";
         std::cin >> charInput;
         std::cout << std::endl;
@@ -45,7 +46,8 @@ int main()
 				data.load(field.getDifficulty());
 				break;
 			case '2':
-                std::cout << "How many boards to generate?\n";
+                std::cout << "How many boards to generate? Current total: "
+					<< data.total() << "\n";
 				std::cin >> input;
 
                 if (input > 0)
@@ -57,28 +59,34 @@ int main()
                         field.reset();
                         data.insert(field.find3BV());
                         if (i % (input / 25) == 0)
-                        {
 	                        std::cout << '#'; //progress bar
-                        }
                     }
 
-                	data.save(field.getDifficulty());
+                    std::cout << "\n\n";
 
-                    std::cout << "\n\nTotal boards checked: " << data.total()
-                        << "\nmin 3bv: " << data.minimum()
-                        << "\nq1: " << data.q1()
-                        << "\nmedian: " << data.median()                                    
-                        << "\nmean: " << data.mean()
-                        << "\nq3: " << data.q3()
-                        << "\nmax 3bv: " << data.maximum()
-                        << "\n";
+                	data.save(field.getDifficulty());
 				}
                 else if (input == 0)
+                {
                     std::cout << "\nNo boards generated.\n";
+                    break;
+                }
                 else
+                {
 					std::cout << "\nInvalid input.\n\n";
-                break;
-            case '3':
+                    break;
+                }
+			case '3':
+                std::cout << "Total boards checked: " << data.total()
+                    << "\nmin 3bv: " << data.minimum()
+                    << "\nq1: " << data.q1()
+                    << "\nmedian: " << data.median()                                    
+                    << "\nmean: " << data.mean()
+                    << "\nq3: " << data.q3()
+                    << "\nmax 3bv: " << data.maximum()
+                    << "\n\n";
+				break;
+            case '4':
                 std::cout << "3bv: ";
                 std::cin >> input;
                 percentage = data.percentage(input);
