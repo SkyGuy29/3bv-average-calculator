@@ -76,7 +76,7 @@ int main()
                 else if (input == 0)
                     std::cout << "\nNo boards generated.\n";
                 else
-					std::cout << "\nInvalid input.\n";
+					std::cout << "\nInvalid input.\n\n";
                 break;
             case '3':
                 std::cout << "3bv: ";
@@ -87,10 +87,10 @@ int main()
 
                 marginOfError = 2.576 * sqrt(percentage * (1 - percentage) / data.total());
                 std::cout << "99% confidence interval:\n"
-                    << '(' << percentage - marginOfError << ", " << percentage + marginOfError << ")\n";
+                    << '(' << percentage - marginOfError << ", " << percentage + marginOfError << ")\n\n";
                 break;
 			default:
-				std::cout << "Invalid input.\n";
+				std::cout << "Invalid input.\n\n";
 				break;
 		}
 
