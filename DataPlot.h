@@ -22,6 +22,7 @@ public:
     unsigned q1();
 	unsigned median();
     double mean() const;
+    double stdDev() const;
     unsigned q3();
     unsigned maximum() { if (!sorted) sort(); return data[data.size() - 1].num; }
     unsigned long total() const;

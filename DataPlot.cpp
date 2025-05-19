@@ -83,6 +83,18 @@ double DataPlot::mean() const
 }
 
 
+double DataPlot::stdDev() const
+{
+    const double theMean = mean();
+    double sum = 0;
+
+    for (const auto i : data)
+		sum += (i.num - theMean) * (i.num - theMean) * i.mult;
+
+    return sqrt(sum / total());
+}
+
+
 unsigned DataPlot::q3()
 {
     double count = 0;

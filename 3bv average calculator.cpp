@@ -82,6 +82,7 @@ int main()
                     << "\nq1: " << data.q1()
                     << "\nmedian: " << data.median()                                    
                     << "\nmean: " << data.mean()
+					<< "\nstandard deviation: " << data.stdDev()
                     << "\nq3: " << data.q3()
                     << "\nmax 3bv: " << data.maximum()
                     << "\n\n";
