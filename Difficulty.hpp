@@ -26,8 +26,3 @@ static const Foo diffData[COUNT] =
     {"expert.txt", 30, 16, 99},
     {"googHard.txt", 24, 20, 99}
 };
-
-
-
-#define DIFF EXPERT
-const int SIZEA = diffData[DIFF].sizeX, SIZEB = diffData[DIFF].sizeY, MINES = diffData[DIFF].mines;

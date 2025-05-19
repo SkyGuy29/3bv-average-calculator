@@ -3,6 +3,7 @@
 
 void DataPlot::load(Difficulty diffic)
 {
+    data.clear();
     std::ifstream file(diffData[diffic].fileName);
     int x, y;
 
@@ -13,23 +14,20 @@ void DataPlot::load(Difficulty diffic)
     } while (!file.eof());
 }
 
+
 void DataPlot::insert(int newNum)
 {
     bool inserted = false;
 
     for (auto & i : data)
-    {
         if (i.num == newNum)
         {
             i.mult++;
             inserted = true;
         }
-    }
 
     if (!inserted)
-    {
         data.emplace_back(newNum);
-    }
 
     sorted = false;
 }
@@ -108,9 +106,7 @@ int DataPlot::total() const
     int total = 0;
 
     for (const auto i: data)
-    {
         total += i.mult;
-    }
 
     return total;
 }
@@ -129,9 +125,7 @@ double DataPlot::percentage(const int xVal)
         for (const auto i : data)
         {
             if (i.num <= xVal)
-            {
                 sum += i.mult;
-            }
             else
                 return sum / total();
         }
@@ -139,12 +133,9 @@ double DataPlot::percentage(const int xVal)
     else
     {
         for (const auto i : data)
-        {
             if (i.num >= xVal)
-            {
                 sum += i.mult;
-            }
-        }
+        
         return sum / total();
     }
 }
@@ -158,8 +149,6 @@ void DataPlot::save(Difficulty diffic) const
     {
         file << i.num << ' ' << i.mult;
         if (i.num != data[data.size() - 1].num)
-        {
             file << '\n';
-        }
     }
 }
