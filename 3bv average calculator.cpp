@@ -52,13 +52,13 @@ int main()
 
                 if (input > 0)
 				{
-                    std::cout << "\nGenerating " << input << " boards...\n";
+                    std::cout << "\nGenerating " << input << " boards. Closing now will not save.\n";
 
                     for (int i = 1; i <= input; i++)
                     {
                         field.reset();
                         data.insert(field.find3BV());
-                        if (i % (input / 25) == 0)
+                        if (i % (input / 20) == 0)
 	                        std::cout << '#'; //progress bar
                     }
 

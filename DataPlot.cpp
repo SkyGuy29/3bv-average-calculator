@@ -5,7 +5,7 @@ void DataPlot::load(Difficulty diffic)
 {
     data.clear();
     std::ifstream file(diffData[diffic].fileName);
-    int x, y;
+    unsigned x, y;
 
     do
     {
@@ -15,7 +15,7 @@ void DataPlot::load(Difficulty diffic)
 }
 
 
-void DataPlot::insert(int newNum)
+void DataPlot::insert(unsigned newNum)
 {
     bool inserted = false;
 
@@ -33,10 +33,10 @@ void DataPlot::insert(int newNum)
 }
 
 
-int DataPlot::q1()
+unsigned DataPlot::q1()
 {
     double count = 0;
-    const int tot = total();
+    const auto tot = total();
 
     if (!sorted)
         sort();
@@ -51,10 +51,10 @@ int DataPlot::q1()
 }
 
 
-int DataPlot::median()
+unsigned DataPlot::median()
 {
     double count = 0;
-    const int tot = total();
+    const auto tot = total();
 
     if (!sorted)
         sort();
@@ -83,10 +83,10 @@ double DataPlot::mean() const
 }
 
 
-int DataPlot::q3()
+unsigned DataPlot::q3()
 {
     double count = 0;
-    const int tot = total();
+    const auto tot = total();
 
     if (!sorted)
         sort();
@@ -101,9 +101,9 @@ int DataPlot::q3()
 }
 
 
-int DataPlot::total() const
+unsigned long DataPlot::total() const
 {
-    int total = 0;
+    unsigned long total = 0;
 
     for (const auto i: data)
         total += i.mult;
@@ -112,15 +112,15 @@ int DataPlot::total() const
 }
 
 
-double DataPlot::percentage(const int xVal)
+double DataPlot::percentage(const unsigned xVal)
 {
-    const int med = median();
+    const unsigned med = median();
     double sum = 0;
 
     if (!sorted)
         sort();
 
-    if (xVal <= med)
+    if (xVal <= med) //lower bound
     {
         for (const auto i : data)
         {
@@ -130,7 +130,7 @@ double DataPlot::percentage(const int xVal)
                 return sum / total();
         }
     }
-    else
+    else //upper bound
     {
         for (const auto i : data)
             if (i.num >= xVal)
@@ -141,8 +141,11 @@ double DataPlot::percentage(const int xVal)
 }
 
 
-void DataPlot::save(Difficulty diffic) const
+void DataPlot::save(Difficulty diffic)
 {
+    if (!sorted)
+        sort();
+
     std::ofstream file(diffData[diffic].fileName);
 
     for (const auto i : data)

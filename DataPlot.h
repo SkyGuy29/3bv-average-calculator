@@ -7,9 +7,9 @@
 
 struct NumMult
 {
-    int num, mult;
+    unsigned num, mult;
 
-    NumMult(int newNum, int newMult = 1) : num(newNum), mult(newMult) {}
+    NumMult(unsigned newNum, unsigned newMult = 1) : num(newNum), mult(newMult) {}
 };
 
 
@@ -17,16 +17,16 @@ class DataPlot
 {
 public:
     void load(Difficulty);
-    void insert(int newNum);
-    int minimum() { if (!sorted) sort(); return data[0].num; }
-    int q1();
-	int median();
+    void insert(unsigned newNum);
+    unsigned minimum() { if (!sorted) sort(); return data[0].num; }
+    unsigned q1();
+	unsigned median();
     double mean() const;
-    int q3();
-    int maximum() { if (!sorted) sort(); return data[data.size() - 1].num; }
-    int total() const;
-    double percentage(int xVal);
-    void save(Difficulty) const;
+    unsigned q3();
+    unsigned maximum() { if (!sorted) sort(); return data[data.size() - 1].num; }
+    unsigned long total() const;
+    double percentage(unsigned xVal);
+    void save(Difficulty);
 
 private:
     void sort()
