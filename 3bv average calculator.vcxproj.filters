@@ -41,5 +41,6 @@
     <Text Include="intermediate.txt" />
     <Text Include="beginner.txt" />
     <Text Include="googHard.txt" />
+    <Text Include="evil.txt" />
   </ItemGroup>
 </Project>

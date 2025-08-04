@@ -35,14 +35,29 @@ int main()
 				break;
 			case '1':
 				std::cout << "Choose a difficulty:\n"
-				    << "0: Beginner\n"
-				    << "1: Intermediate\n"
-				    << "2: Expert\n"
-				    << "3: Google minesweeper hard\n\n"
+				    << "0: Beginner (9x9/10)\n"
+				    << "1: Intermediate (16x16/40)\n"
+				    << "2: Expert (30x16/99)\n"
+				    << "3: Google minesweeper hard (24x20/99)\n"
+				    << "4: Evil (30x20/130)\n"
+				    << "5: Custom\n\n"
 					<< "choose: ";
 				std::cin >> input;
 				std::cout << std::endl;
-				field.setDifficulty(static_cast<Difficulty>(input));
+                if (input != COUNT)
+					field.setDifficulty(static_cast<Difficulty>(input));
+                else
+                {
+					int sizeX, sizeY, mines;
+					std::cout << "Enter size X: ";
+					std::cin >> sizeX;
+					std::cout << "Enter size Y: ";
+					std::cin >> sizeY;
+					std::cout << "Enter number of mines: ";
+					std::cin >> mines;
+
+					//field.setCustom(sizeX, sizeY, mines);
+				}
 				data.load(field.getDifficulty());
 				break;
 			case '2':

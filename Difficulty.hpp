@@ -15,6 +15,7 @@ enum Difficulty
     INTERMEDIATE,
     EXPERT,
     GOOG_HARD,
+    EVIL,
     COUNT
 };
 
@@ -24,5 +25,6 @@ static const Foo diffData[COUNT] =
     {"beginner.txt", 9, 9, 10},
     {"intermediate.txt", 16, 16, 40},
     {"expert.txt", 30, 16, 99},
-    {"googHard.txt", 24, 20, 99}
+    {"googHard.txt", 24, 20, 99},
+    {"evil.txt", 30, 20, 130}
 };

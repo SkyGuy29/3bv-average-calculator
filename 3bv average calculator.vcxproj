@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="beginner.txt" />
+    <Text Include="evil.txt" />
     <Text Include="expert.txt" />
     <Text Include="googHard.txt" />
     <Text Include="intermediate.txt" />
