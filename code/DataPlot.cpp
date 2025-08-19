@@ -160,7 +160,7 @@ void DataPlot::save(Difficulty diffic)
     if (!sorted)
         sort();
 
-    std::ofstream file(diffData[diffic].fileName);
+    std::ofstream file("3bvData/" + diffData[diffic].fileName);
 
     for (const auto i : data)
     {
