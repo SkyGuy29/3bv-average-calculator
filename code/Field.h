@@ -3,7 +3,6 @@
 #include <time.h>
 
 
-
 class Field
 {
 public:
@@ -20,8 +19,6 @@ public:
 	int find3BV();
 	void saveBoard();
 private:
-	void init() const;
-	void label() const;
 	void floodFillMark(bool**, int, int);
 	int** field;
 	Difficulty diff = BEGINNER;

@@ -9,7 +9,7 @@ struct NumMult
 {
     unsigned num, mult;
 
-    NumMult(unsigned newNum, unsigned newMult = 1) : num(newNum), mult(newMult) {}
+    explicit NumMult(const unsigned newNum, const unsigned newMult = 1) : num(newNum), mult(newMult) {}
 };
 
 

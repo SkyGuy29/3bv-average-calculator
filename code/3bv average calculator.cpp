@@ -27,7 +27,7 @@ int main()
             << "4: find probability\n\n"
             << "choose: ";
         std::cin >> charInput;
-        std::cout << std::endl;
+        std::cout << '\n';
 
 		switch (charInput)
 		{
@@ -43,7 +43,7 @@ int main()
 				    << "5: Custom\n\n"
 					<< "choose: ";
 				std::cin >> input;
-				std::cout << std::endl;
+				std::cout << '\n';
                 if (input != COUNT)
 					field.setDifficulty(static_cast<Difficulty>(input));
                 else
@@ -57,6 +57,11 @@ int main()
 					std::cin >> mines;
 
 					//field.setCustom(sizeX, sizeY, mines);
+
+                    //todo:
+                    // - finish custom
+                    // - opening distribution
+                    // - zini distribution 
 				}
 				data.load(field.getDifficulty());
 				break;

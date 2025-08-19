@@ -128,21 +128,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="3bv average calculator.cpp" />
-    <ClCompile Include="DataPlot.cpp" />
-    <ClCompile Include="Field.cpp" />
+    <ClCompile Include="code\3bv average calculator.cpp" />
+    <ClCompile Include="code\DataPlot.cpp" />
+    <ClCompile Include="code\Field.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataPlot.h" />
-    <ClInclude Include="Difficulty.hpp" />
-    <ClInclude Include="Field.h" />
+    <ClInclude Include="code\DataPlot.h" />
+    <ClInclude Include="code\Difficulty.hpp" />
+    <ClInclude Include="code\Field.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="beginner.txt" />
-    <Text Include="evil.txt" />
-    <Text Include="expert.txt" />
-    <Text Include="googHard.txt" />
-    <Text Include="intermediate.txt" />
+    <Text Include="3bvData\beginner.txt" />
+    <Text Include="3bvData\evil.txt" />
+    <Text Include="3bvData\expert.txt" />
+    <Text Include="3bvData\googHard.txt" />
+    <Text Include="3bvData\intermediate.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

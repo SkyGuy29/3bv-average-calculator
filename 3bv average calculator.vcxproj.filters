@@ -15,32 +15,32 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="3bv average calculator.cpp">
+    <ClCompile Include="code\3bv average calculator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DataPlot.cpp">
+    <ClCompile Include="code\DataPlot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Field.cpp">
+    <ClCompile Include="code\Field.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataPlot.h">
+    <ClInclude Include="code\DataPlot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Field.h">
+    <ClInclude Include="code\Field.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Difficulty.hpp">
+    <ClInclude Include="code\Difficulty.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="expert.txt" />
-    <Text Include="intermediate.txt" />
-    <Text Include="beginner.txt" />
-    <Text Include="googHard.txt" />
-    <Text Include="evil.txt" />
+    <Text Include="3bvData\expert.txt" />
+    <Text Include="3bvData\intermediate.txt" />
+    <Text Include="3bvData\beginner.txt" />
+    <Text Include="3bvData\googHard.txt" />
+    <Text Include="3bvData\evil.txt" />
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 void DataPlot::load(Difficulty diffic)
 {
     data.clear();
-    std::ifstream file(diffData[diffic].fileName);
+    std::ifstream file("3bvData/" + diffData[diffic].fileName);
     unsigned x, y;
 
     do
@@ -150,6 +150,8 @@ double DataPlot::percentage(const unsigned xVal)
         
         return sum / total();
     }
+
+    return -1;
 }
 
 
