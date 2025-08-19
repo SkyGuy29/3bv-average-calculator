@@ -8,7 +8,7 @@ int main()
 {
     Field field;
     DataPlot data;
-    int input = 0;
+    long unsigned input = 0;
     char charInput;
 	double percentage, marginOfError;
 
@@ -39,15 +39,20 @@ int main()
 				    << "1: Intermediate (16x16/40)\n"
 				    << "2: Expert (30x16/99)\n"
 				    << "3: Google minesweeper hard (24x20/99)\n"
-				    << "4: Evil (30x20/130)\n"
-				    << "5: Custom\n\n"
+				    << "4: Evil (30x20/130)\n\n"
+				    //<< "5: Custom\n\n"
 					<< "choose: ";
 				std::cin >> input;
 				std::cout << '\n';
-                if (input != COUNT)
-					field.setDifficulty(static_cast<Difficulty>(input));
-                else
+                if (input < COUNT)
                 {
+					field.setDifficulty(static_cast<Difficulty>(input));
+					data.load(field.getDifficulty());
+                }
+				/*
+                else if (input == COUNT)
+                {
+                    
 					int sizeX, sizeY, mines;
 					std::cout << "Enter size X: ";
 					std::cin >> sizeX;
@@ -56,25 +61,31 @@ int main()
 					std::cout << "Enter number of mines: ";
 					std::cin >> mines;
 
-					//field.setCustom(sizeX, sizeY, mines);
+					field.setCustom(sizeX, sizeY, mines);
+                	
 
                     //todo:
                     // - finish custom
+                    //     - requires reworking setDifficulty() and likely Difficulty.hpp
                     // - opening distribution
-                    // - zini distribution 
+                    //     - small thing implemented in find3bv() but needs another return value, new DataPlot, and new files
+                    // - save min/max boards for funsies :P
+                    // - zini distribution?
 				}
-				data.load(field.getDifficulty());
+				*/
+                else
+                    std::cout << "Invalid input.\n\n";
 				break;
 			case '2':
                 std::cout << "How many boards to generate? Current total: "
-					<< data.total() << "\n";
+					<< data.total() << "\n" << "(please be careful with your zeros!)\n";
 				std::cin >> input;
 
                 if (input > 0)
 				{
-                    std::cout << "\nGenerating " << input << " boards. Closing now will not save.\n";
+                    std::cout << "\nGenerating " << input << " boards. Closing now will not save.\nProgress: ";
 
-                    for (int i = 1; i <= input; i++)
+                    for (long unsigned i = 1; i <= input; i++)
                     {
                         field.reset();
                         data.insert(field.find3BV());
@@ -88,7 +99,7 @@ int main()
 				}
                 else if (input == 0)
                 {
-                    std::cout << "\nNo boards generated.\n";
+                    std::cout << "\nNo boards generated.\n\n";
                     break;
                 }
                 else
