@@ -10,9 +10,9 @@ Field::Field()
     sizeY = diffData[BEGINNER].sizeY;
     mines = diffData[BEGINNER].mines;
 
-    field = new int* [sizeX];
+    field = new short* [sizeX];
     for (int i = 0; i < sizeX; ++i) 
-        field[i] = new int[sizeY];
+        field[i] = new short[sizeY];
 
     for (int i = 0; i < sizeX * sizeY; ++i)
         field[i / sizeY][i % sizeY] = 0;
@@ -41,9 +41,9 @@ void Field::setDifficulty(Difficulty diffic)
     sizeY = diffData[diffic].sizeY;
     mines = diffData[diffic].mines;
 
-    field = new int* [sizeX];
+    field = new short* [sizeX];
     for (int i = 0; i < sizeX; ++i) 
-        field[i] = new int[sizeY];
+        field[i] = new short[sizeY];
 
     for (int i = 0; i < sizeX * sizeY; ++i)
         field[i / sizeY][i % sizeY] = 0;
@@ -52,11 +52,10 @@ void Field::setDifficulty(Difficulty diffic)
 
 void Field::reset() const
 {
-    //reset and randomize the field
     for (int i = 0; i < sizeX * sizeY; i++)
         field[i / sizeY][i % sizeY] = 0;
 
-    int coords[2];
+    int coords[2] {};
     
     for (int i = 0; i < mines; i++) //add this many mines to the board
     {
@@ -82,10 +81,9 @@ void Field::reset() const
 }
 
 
-int Field::find3BV()
+BoardStats Field::findStats()
 {
-    int countClicks = 0;
-	/*int countOps = 0;*/
+    unsigned countClicks = 0, countOps = 0;
     bool** marks = new bool* [sizeX]; //to mark visited cells
 
     for (int i = 0; i < sizeX; ++i)
@@ -100,8 +98,7 @@ int Field::find3BV()
                 if (field[i][j] == 0) 
                 {
                     //start a flood-fill for an opening
-                    countClicks++;
-                    //countOps++;
+                    countOps++;
                     floodFillMark(marks, i, j);
                 }
                 else if (field[i][j] == 9) 
@@ -115,7 +112,7 @@ int Field::find3BV()
         delete[] marks[i];
     delete[] marks;
 
-    return countClicks;
+    return { countOps + countClicks, countOps };
 }
 
 
@@ -129,7 +126,7 @@ void Field::floodFillMark(bool** marks, const int a, const int b)
 {
     if (a < 0 || b < 0 || a >= sizeX || b >= sizeY) return; //out of bounds
     if (marks[a][b]) return; //already visited
-    if (field[a][b] == 9) return; //ignore mines (this shouldn't ever happen I think, just to be sure tho)
+    if (field[a][b] == 9) return; //ignore mines (this shouldn't ever happen I think, doesn't hurt to have it though)
 
     marks[a][b] = true; //mark current cell as visited
 

@@ -3,6 +3,13 @@
 #include <time.h>
 
 
+struct BoardStats
+{
+	unsigned bbbv, ops;
+
+	BoardStats() = default;
+};
+
 class Field
 {
 public:
@@ -16,11 +23,11 @@ public:
 	int getMines() const { return mines; }
 
 	void reset() const;
-	int find3BV();
+	BoardStats findStats();
 	void saveBoard();
 private:
 	void floodFillMark(bool**, int, int);
-	int** field;
+	short** field;
 	Difficulty diff = BEGINNER;
 	int sizeX, sizeY, mines;
 };

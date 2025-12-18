@@ -39,9 +39,9 @@ int main()
 				    << "1: Intermediate (16x16/40)\n"
 				    << "2: Expert (30x16/99)\n"
 				    << "3: Google minesweeper hard (24x20/99)\n"
-				    << "4: Evil (30x20/130)\n\n"
-				    //<< "5: Custom\n\n"
-					<< "choose: ";
+				    << "4: Evil (30x20/130)\n"
+				    //<< "5: Custom\n"
+					<< "\nchoose: ";
 				std::cin >> input;
 				std::cout << '\n';
                 if (input < COUNT)
@@ -88,7 +88,7 @@ int main()
                     for (long unsigned i = 1; i <= input; i++)
                     {
                         field.reset();
-                        data.insert(field.find3BV());
+                        data.insert(field.findStats().bbbv);
                         if (i % (input / 20) == 0)
 	                        std::cout << '#'; //progress bar
                     }
